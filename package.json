@@ -1,0 +1,17 @@
+{
+	"name": "freepostseo-backend-api",
+	"version": "0.0.1",
+	"description": "Backend Server of FreePostSEO",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"author": "Soumyajit Das",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"mongoose": "^5.12.12"
+	}
+}
