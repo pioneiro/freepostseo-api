@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 85vh;
+  width: 100%;
+  margin: auto;
+  background-color: #14213d;
+  color: #e5e5e5;
+  font-size: 18px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Nunito";
+}
+
+body > header {
+  height: 10vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #fca311;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fca311), to(#14213d));
+  background-image: linear-gradient(#fca311, #14213d);
+}
+
+body > header > div.title {
+  text-transform: capitalize;
+  font-size: 2.5em;
+}
+
+body > main {
+  min-height: 85vh;
+  width: 60%;
+  margin: 10vh auto 5vh auto;
+  padding: 5vh 0;
+}
+
+body > main > ul.endpoints {
+  list-style: none;
+}
+
+body > main > ul.endpoints > li {
+  margin-left: 10px;
+}
+
+body > main > ul.endpoints > li:not(:last-child) {
+  margin-bottom: 100px;
+}
+
+body > main > ul.endpoints > li > div.name {
+  font-size: 1.75em;
+  font-weight: 700;
+  color: #fca311;
+}
+
+body > main > ul.endpoints > li > div.description {
+  margin: 20px 0 40px 0;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+body > main > ul.endpoints > li > ul.pathList {
+  list-style: none;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li {
+  margin-left: 50px;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.method {
+  color: #14213d;
+  background-color: #e5e5e5;
+  display: inline-block;
+  padding: 0 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.path {
+  color: #fca311;
+  display: inline-block;
+  letter-spacing: 2px;
+  -webkit-user-select: all;
+     -moz-user-select: all;
+      -ms-user-select: all;
+          user-select: all;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body,
+body > main > ul.endpoints > li > ul.pathList > li > div.response {
+  margin: 50px 0 50px 50px;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.response:last-child {
+  margin-bottom: 0;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.type,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.type {
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 1.25em;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.param,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.param {
+  margin-bottom: 5px;
+  color: #14213d;
+  background-color: #e5e5e5;
+  display: inline-block;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.role,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role {
+  margin-bottom: 10px;
+  color: #fca311;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.role:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role:last-child {
+  margin-bottom: 0;
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.separator,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator {
+  height: 2px;
+  margin-bottom: 10px;
+  background-color: #e5e5e5;
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #e5e5e5), color-stop(0.75, #14213d));
+  background-image: linear-gradient(to right, #e5e5e5 0, #14213d 0.75);
+}
+
+body > main > ul.endpoints > li > ul.pathList > li > div.body > div.separator:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator:last-child {
+  margin-bottom: 0;
+}
+
+body > footer {
+  height: 5vh;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #fca311;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#14213d), to(#fca311));
+  background-image: linear-gradient(to bottom, #14213d, #fca311);
+  color: #e5e5e5;
+}
+/*# sourceMappingURL=style.css.map */

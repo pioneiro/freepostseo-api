@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="/icon.svg" type="image/svg" />
+		<link rel="stylesheet" href="/style.css" />
+		<title>Backend API Documentation</title>
+	</head>
+	<body>
+		<header>
+			<div class="title">Free Post SEO Backend API Endpoints</div>
+		</header>
+		<main>
+			<ul class="endpoints">
+				<% endpoints.forEach(endpoint => { %>
+				<li>
+					<div class="name"><%= endpoint.name %></div>
+					<div class="description"><%= endpoint.description %></div>
+					<ul class="pathList">
+						<% endpoint.pathList.forEach(path => { %>
+						<li>
+							<div class="method"><%= path.method %></div>
+							<div class="path"><%= path.path %></div>
+							<% if (path.body) { %>
+							<div class="body">
+								<div class="type">Body</div>
+								<% path.body.forEach(element => { %><% if (element.param) { %>
+								<div class="param"><%= element.param %></div>
+								<% } %>
+								<div class="role"><%= element.description %></div>
+								<div class="separator"></div>
+								<% }) %>
+							</div>
+							<% } %><% if (path.response) { %>
+							<div class="response">
+								<div class="type">Response</div>
+								<% path.response.forEach(element => { %><% if (element.param) {
+								%>
+								<div class="param"><%= element.param %></div>
+								<% } %>
+								<div class="role"><%= element.description %></div>
+								<div class="separator"></div>
+								<% }) %>
+							</div>
+							<% } %>
+						</li>
+						<% }) %>
+					</ul>
+				</li>
+				<% }) %>
+			</ul>
+		</main>
+		<footer>
+			<div class="copyright">
+				Copyright © <%= new Date().getFullYear() %>, All Right Reserved Naayab
+			</div>
+		</footer>
+	</body>
+</html>

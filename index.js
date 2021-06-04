@@ -13,6 +13,10 @@ const index = express();
 
 const server = createServer(index);
 
+index.set("view engine", "ejs");
+
+index.use(express.static("assets"));
+
 index.use(express.json());
 index.use(express.urlencoded({ extended: true }));
 

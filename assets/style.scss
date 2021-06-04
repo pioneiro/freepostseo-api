@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 85vh;
+	width: 100%;
+	margin: auto;
+	background-color: #14213d;
+	color: #e5e5e5;
+	font-size: 18px;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	font-family: "Nunito";
+
+	> header {
+		height: 10vh;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #fca311;
+		background-image: linear-gradient(#fca311, #14213d);
+
+		> div.title {
+			text-transform: capitalize;
+			font-size: 2.5em;
+		}
+	}
+
+	> main {
+		min-height: 85vh;
+		width: 60%;
+		margin: 10vh auto 5vh auto;
+		padding: 5vh 0;
+
+		> ul.endpoints {
+			list-style: none;
+
+			> li {
+				margin-left: 10px;
+
+				&:not(:last-child) {
+					margin-bottom: 100px;
+				}
+
+				> div.name {
+					font-size: 1.75em;
+					font-weight: 700;
+					color: #fca311;
+				}
+
+				> div.description {
+					margin: 20px 0 40px 0;
+					font-style: italic;
+					font-size: 1.5em;
+				}
+
+				> ul.pathList {
+					list-style: none;
+
+					> li {
+						margin-left: 50px;
+
+						&:not(:last-child) {
+							margin-bottom: 50px;
+						}
+
+						> div.method {
+							color: #14213d;
+							background-color: #e5e5e5;
+							display: inline-block;
+							padding: 0 10px;
+							border-radius: 10px;
+							margin-right: 5px;
+						}
+
+						> div.path {
+							color: #fca311;
+							display: inline-block;
+							letter-spacing: 2px;
+							user-select: all;
+						}
+
+						> div.body,
+						> div.response {
+							margin: 50px 0 50px 50px;
+
+							&:last-child {
+								margin-bottom: 0;
+							}
+
+							> div.type {
+								margin-bottom: 10px;
+								font-weight: 300;
+								font-size: 1.25em;
+							}
+
+							> div.param {
+								margin-bottom: 5px;
+								color: #14213d;
+								background-color: #e5e5e5;
+								display: inline-block;
+								padding: 0 10px;
+								border-radius: 10px;
+							}
+
+							> div.role {
+								margin-bottom: 10px;
+								color: #fca311;
+
+								&:last-child {
+									margin-bottom: 0;
+								}
+							}
+
+							> div.separator {
+								height: 2px;
+								margin-bottom: 10px;
+								background-color: #e5e5e5;
+								background-image: linear-gradient(
+									to right,
+									#e5e5e5 0,
+									#14213d 0.75
+								);
+
+								&:last-child {
+									margin-bottom: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	> footer {
+		height: 5vh;
+		width: 100%;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #fca311;
+		background-image: linear-gradient(to bottom, #14213d, #fca311);
+		color: #e5e5e5;
+	}
+}
