@@ -10,6 +10,7 @@ router.post("/", (req, res) => {
 		else {
 			const { fileName, readStream } = data;
 
+			res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
 			res.setHeader("Content-Type", "audio/mpeg");
 			res.setHeader(
 				"Content-Disposition",
