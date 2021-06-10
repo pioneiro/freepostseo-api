@@ -8,6 +8,12 @@ import endpoints from "../lib/data/endpoints.js";
 
 const router = Router();
 
+router.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Method", "GET, POST");
+	next();
+});
+
 router.use("/tools/shorturl", shorturl);
 router.use("/tools/scrapper", scrapper);
 router.use("/tools/youtubemp3", youtubemp3);
