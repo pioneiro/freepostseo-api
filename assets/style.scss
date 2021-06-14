@@ -91,8 +91,9 @@ body {
 						}
 
 						> div.body,
-						> div.response {
-							margin: 50px 0 50px 50px;
+						> div.response,
+						> div.headers {
+							margin: 50px 0 50px 80px;
 
 							&:last-child {
 								margin-bottom: 0;
@@ -102,6 +103,8 @@ body {
 								margin-bottom: 10px;
 								font-weight: 300;
 								font-size: 1.25em;
+								position: relative;
+								left: -30px;
 							}
 
 							> div.param {

@@ -106,24 +106,30 @@ body > main > ul.endpoints > li > ul.pathList > li > div.path {
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body,
-body > main > ul.endpoints > li > ul.pathList > li > div.response {
-  margin: 50px 0 50px 50px;
+body > main > ul.endpoints > li > ul.pathList > li > div.response,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers {
+  margin: 50px 0 50px 80px;
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body:last-child,
-body > main > ul.endpoints > li > ul.pathList > li > div.response:last-child {
+body > main > ul.endpoints > li > ul.pathList > li > div.response:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers:last-child {
   margin-bottom: 0;
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.type,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.type {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.type,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.type {
   margin-bottom: 10px;
   font-weight: 300;
   font-size: 1.25em;
+  position: relative;
+  left: -30px;
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.param,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.param {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.param,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.param {
   margin-bottom: 5px;
   color: #14213d;
   background-color: #e5e5e5;
@@ -133,18 +139,21 @@ body > main > ul.endpoints > li > ul.pathList > li > div.response > div.param {
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.role,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.role {
   margin-bottom: 10px;
   color: #fca311;
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.role:last-child,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role:last-child {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.role:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.role:last-child {
   margin-bottom: 0;
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.separator,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.separator {
   height: 2px;
   margin-bottom: 10px;
   background-color: #e5e5e5;
@@ -153,7 +162,8 @@ body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separato
 }
 
 body > main > ul.endpoints > li > ul.pathList > li > div.body > div.separator:last-child,
-body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator:last-child {
+body > main > ul.endpoints > li > ul.pathList > li > div.response > div.separator:last-child,
+body > main > ul.endpoints > li > ul.pathList > li > div.headers > div.separator:last-child {
   margin-bottom: 0;
 }
 

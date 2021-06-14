@@ -33,6 +33,17 @@
 								<div class="separator"></div>
 								<% }) %>
 							</div>
+							<% } %><% if (path.headers) { %>
+							<div class="headers">
+								<div class="type">Headers</div>
+								<% path.headers.forEach(element => { %><% if (element.param) {
+								%>
+								<div class="param"><%= element.param %></div>
+								<% } %>
+								<div class="role"><%= element.description %></div>
+								<div class="separator"></div>
+								<% }) %>
+							</div>
 							<% } %><% if (path.response) { %>
 							<div class="response">
 								<div class="type">Response</div>
