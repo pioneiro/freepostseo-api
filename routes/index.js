@@ -3,6 +3,7 @@ import { Router } from "express";
 import shorturl from "./shorturl.js";
 import scrapper from "./scrapper.js";
 import youtubemp3 from "./youtubemp3.js";
+import users from "./users.js";
 
 import endpoints from "../lib/data/endpoints.js";
 
@@ -17,6 +18,7 @@ router.use((req, res, next) => {
 router.use("/tools/shorturl", shorturl);
 router.use("/tools/scrapper", scrapper);
 router.use("/tools/youtubemp3", youtubemp3);
+router.use("/users", users);
 
 router.get("/", (req, res) => {
 	res.render("documentation", { endpoints });
