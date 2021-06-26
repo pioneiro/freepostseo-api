@@ -20,6 +20,6 @@
 		"mongoose": "^5.12.12",
 		"nanoid": "^3.1.23",
 		"node-fetch": "^2.6.1",
-		"ytdl-core": "^4.8.2"
+		"ytdl-core": "^4.8.3"
 	}
 }
