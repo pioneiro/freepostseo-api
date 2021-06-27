@@ -10,8 +10,9 @@ router.post("/", (req, res) => {
 		else {
 			const { fileName, readStream } = data;
 
-			res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
+			res.setHeader("Access-Control-Expose-Headers", "filename");
 			res.setHeader("Content-Type", "audio/mpeg");
+			res.setHeader("filename", fileName);
 			res.setHeader(
 				"Content-Disposition",
 				`attachment;\ filename="${fileName}"`
