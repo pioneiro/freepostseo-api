@@ -1,6 +1,6 @@
 {
 	"name": "freepostseo-backend-api",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Backend Server of FreePostSEO",
 	"main": "index.js",
 	"type": "module",
@@ -20,6 +20,7 @@
 		"mongoose": "^5.12.12",
 		"nanoid": "^3.1.23",
 		"node-fetch": "^2.6.1",
+		"nodemailer": "^6.6.2",
 		"ytdl-core": "^4.8.3"
 	}
 }
