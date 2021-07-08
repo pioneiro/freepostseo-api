@@ -10,9 +10,13 @@ import endpoints from "../lib/data/endpoints.js";
 const router = Router();
 
 router.use((req, res, next) => {
-	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.setHeader("Access-Control-Allow-Method", "GET, POST");
-	next();
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    req.headers.origin || req.headers.host
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Method", "GET, POST");
+  next();
 });
 
 router.use("/tools/shorturl", shorturl);
@@ -21,7 +25,7 @@ router.use("/tools/youtubemp3", youtubemp3);
 router.use("/users", users);
 
 router.get("/", (req, res) => {
-	res.render("documentation", { endpoints });
+  res.render("documentation", { endpoints });
 });
 
 export default router;
