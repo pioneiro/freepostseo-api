@@ -37,7 +37,7 @@ router.post("/register", (req, res) => {
     res.status(405).json({ error: "Already Logged In" });
   else
     register(req.body.user, ({ error, token }) => {
-      if (error) res.status(401).json(error);
+      if (error) res.status(401).json({ error });
       else res.cookie("auth-token", token, cookieOptions()).sendStatus(200);
     });
 });
@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
     res.status(405).json({ error: "Already Logged In" });
   else
     login(req.body.user, ({ error, token }) => {
-      if (error) res.status(401).json(error);
+      if (error) res.status(401).json({ error });
       else res.cookie("auth-token", token, cookieOptions()).sendStatus(200);
     });
 });
@@ -60,7 +60,7 @@ router.post("/logout", (req, res) => {
 
 router.post("/forgot", (req, res) => {
   forgotPassword(req.body.email, ({ error, token }) => {
-    if (error) res.status(401).json(error);
+    if (error) res.status(401).json({ error });
     else res.cookie("reset-token", token, cookieOptions(3e5)).sendStatus(200);
   });
 });
@@ -73,15 +73,20 @@ router.post("/verifyotp", (req, res) => {
       req.cookies["reset-token"],
       req.body.otp,
       ({ error, resetid }) => {
-        if (error) res.status(401).json(error);
+        if (error) res.status(401).json({ error });
         else res.cookie("reset-token", "", cookieOptions(0)).json({ resetid });
       }
     );
 });
 
 router.post("/reset/:resetid", (req, res) => {
-  resetPassword(req.params.resetid, req.body.password, (data) =>
-    res.json(data)
+  resetPassword(
+    req.params.resetid,
+    req.body.password,
+    ({ error, _success }) => {
+      if (error) res.status(409).json({ error });
+      else res.sendStatus(200);
+    }
   );
 });
 

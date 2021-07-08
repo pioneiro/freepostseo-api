@@ -5,7 +5,10 @@ import scrapper from "../lib/utils/scrapper.js";
 const router = Router();
 
 router.post("/", (req, res) => {
-	scrapper(req.body.url, (data) => res.json(data));
+  scrapper(req.body.url, ({ error, scrapData }) => {
+    if (error) res.status(409).json({ error });
+    else res.json({ scrapData });
+  });
 });
 
 export default router;
