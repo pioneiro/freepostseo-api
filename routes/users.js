@@ -25,9 +25,9 @@ const getMaxAge = () => {
   return age;
 };
 
-const cookieOptions = (maxAge = getMaxAge()) => ({
-  httpOnly: true,
-  maxAge: maxAge,
+const cookieOptions = ({ maxAge = getMaxAge(), httpOnly = true }) => ({
+  httpOnly,
+  maxAge,
   sameSite: "none",
   secure: true,
 });
@@ -36,9 +36,19 @@ router.post("/register", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    register(req.body.user, ({ error, token }) => {
+    register(req.body.user, ({ error, token, userDetails }) => {
       if (error) res.status(401).json({ error });
-      else res.cookie("auth-token", token, cookieOptions()).sendStatus(200);
+      else
+        res
+          .cookie("auth-token", token, cookieOptions({}))
+          .cookie("isLoggedIn", true, cookieOptions({ httpOnly: false }))
+          .cookie(
+            "email",
+            userDetails.email,
+            cookieOptions({ httpOnly: false })
+          )
+          .cookie("name", userDetails.name, cookieOptions({ httpOnly: false }))
+          .sendStatus(200);
     });
 });
 
@@ -46,16 +56,30 @@ router.post("/login", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    login(req.body.user, ({ error, token }) => {
+    login(req.body.user, ({ error, token, userDetails }) => {
       if (error) res.status(401).json({ error });
-      else res.cookie("auth-token", token, cookieOptions()).sendStatus(200);
+      else
+        res
+          .cookie("auth-token", token, cookieOptions({}))
+          .cookie("isLoggedIn", true, cookieOptions({ httpOnly: false }))
+          .cookie(
+            "email",
+            userDetails.email,
+            cookieOptions({ httpOnly: false })
+          )
+          .cookie("name", userDetails.name, cookieOptions({ httpOnly: false }))
+          .sendStatus(200);
     });
 });
 
 router.post("/logout", (req, res) => {
   if (!req.cookies["auth-token"])
     res.status(405).json({ error: "No Users Logged In!" });
-  else res.cookie("auth-token", "", cookieOptions(0)).sendStatus(200);
+  else
+    res
+      .cookie("auth-token", "", cookieOptions({ maxAge: 0 }))
+      .cookie("isLoggedIn", false, cookieOptions({ httpOnly: false }))
+      .sendStatus(200);
 });
 
 router.post("/forgot", (req, res) => {
@@ -74,20 +98,19 @@ router.post("/verifyotp", (req, res) => {
       req.body.otp,
       ({ error, resetid }) => {
         if (error) res.status(401).json({ error });
-        else res.cookie("reset-token", "", cookieOptions(0)).json({ resetid });
+        else
+          res
+            .cookie("reset-token", "", cookieOptions({ maxAge: 0 }))
+            .json({ resetid });
       }
     );
 });
 
 router.post("/reset/:resetid", (req, res) => {
-  resetPassword(
-    req.params.resetid,
-    req.body.password,
-    ({ error, _success }) => {
-      if (error) res.status(409).json({ error });
-      else res.sendStatus(200);
-    }
-  );
+  resetPassword(req.params.resetid, req.body.password, ({ error }) => {
+    if (error) res.status(409).json({ error });
+    else res.sendStatus(200);
+  });
 });
 
 export default router;
