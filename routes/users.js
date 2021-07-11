@@ -61,7 +61,7 @@ router.post("/login", (req, res) => {
 router.post("/logout", (req, res) => {
   if (!req.cookies["auth-token"])
     res.status(405).json({ error: "No Users Logged In!" });
-  else res.cookie("auth-token", cookieOptions(0)).sendStatus(200);
+  else res.clearCookie("auth-token", cookieOptions(0)).sendStatus(200);
 });
 
 router.post("/forgot", (req, res) => {
@@ -80,7 +80,7 @@ router.post("/verifyotp", (req, res) => {
       req.body.otp,
       ({ error, resetid }) => {
         if (error) res.status(401).json({ error });
-        else res.cookie("reset-token", cookieOptions(0)).json({ resetid });
+        else res.clearCookie("reset-token", cookieOptions(0)).json({ resetid });
       }
     );
 });
