@@ -28,7 +28,7 @@ const getMaxAge = () => {
 const cookieOptions = (maxAge = getMaxAge()) => ({
   httpOnly: true,
   maxAge,
-  sameSite: "Lax",
+  sameSite: "None",
   secure: true,
 });
 
