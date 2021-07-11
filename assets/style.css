@@ -23,6 +23,7 @@ body > header {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 99;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -174,6 +175,7 @@ body > footer {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 99;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
