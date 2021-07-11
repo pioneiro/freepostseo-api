@@ -26,7 +26,7 @@ const getMaxAge = () => {
 };
 
 const cookieOptions = (maxAge = getMaxAge()) => ({
-  httpOnly,
+  httpOnly: true,
   maxAge,
   sameSite: "Lax",
   secure: true,
@@ -36,9 +36,12 @@ router.post("/register", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    register(req.body.user, ({ error, token, user }) => {
+    register(req.body.user, ({ error, token, userDetails }) => {
       if (error) res.status(401).json({ error });
-      else res.cookie("auth-token", token, cookieOptions()).json({ user });
+      else
+        res
+          .cookie("auth-token", token, cookieOptions())
+          .json({ user: userDetails });
     });
 });
 
@@ -46,9 +49,12 @@ router.post("/login", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    login(req.body.user, ({ error, token, user }) => {
+    login(req.body.user, ({ error, token, userDetails }) => {
       if (error) res.status(401).json({ error });
-      else res.cookie("auth-token", token, cookieOptions()).json({ user });
+      else
+        res
+          .cookie("auth-token", token, cookieOptions())
+          .json({ user: userDetails });
     });
 });
 
