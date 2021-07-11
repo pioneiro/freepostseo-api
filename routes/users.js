@@ -16,7 +16,7 @@ const getMaxAge = () => {
 
   expiry.setDate(now.getDate() + 1);
   expiry.setHours(0);
-  expiry.setMinutes(0);
+  expiry.setMinutes(1110);
   expiry.setSeconds(0);
   expiry.setMilliseconds(0);
 
@@ -28,8 +28,7 @@ const getMaxAge = () => {
 const cookieOptions = ({ maxAge = getMaxAge(), httpOnly = true }) => ({
   httpOnly,
   maxAge,
-  sameSite: "none",
-  secure: true,
+  domain: "freepostseo.com",
 });
 
 router.post("/register", (req, res) => {
@@ -77,7 +76,7 @@ router.post("/logout", (req, res) => {
     res.status(405).json({ error: "No Users Logged In!" });
   else
     res
-      .cookie("auth-token", "", cookieOptions({ maxAge: 0 }))
+      .clearCookie("auth-token", cookieOptions({ maxAge: 0 }))
       .cookie("isLoggedIn", false, cookieOptions({ httpOnly: false }))
       .sendStatus(200);
 });
@@ -85,7 +84,10 @@ router.post("/logout", (req, res) => {
 router.post("/forgot", (req, res) => {
   forgotPassword(req.body.email, ({ error, token }) => {
     if (error) res.status(401).json({ error });
-    else res.cookie("reset-token", token, cookieOptions(3e5)).sendStatus(200);
+    else
+      res
+        .cookie("reset-token", token, cookieOptions({ maxAge: 3e5 }))
+        .sendStatus(200);
   });
 });
 
@@ -100,7 +102,7 @@ router.post("/verifyotp", (req, res) => {
         if (error) res.status(401).json({ error });
         else
           res
-            .cookie("reset-token", "", cookieOptions({ maxAge: 0 }))
+            .clearCookie("reset-token", cookieOptions({ maxAge: 0 }))
             .json({ resetid });
       }
     );
