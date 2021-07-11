@@ -25,29 +25,20 @@ const getMaxAge = () => {
   return age;
 };
 
-const cookieOptions = ({ maxAge = getMaxAge(), httpOnly = true }) => ({
+const cookieOptions = (maxAge = getMaxAge()) => ({
   httpOnly,
   maxAge,
-  domain: "freepostseo.com",
+  sameSite: "Lax",
+  secure: true,
 });
 
 router.post("/register", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    register(req.body.user, ({ error, token, userDetails }) => {
+    register(req.body.user, ({ error, token, user }) => {
       if (error) res.status(401).json({ error });
-      else
-        res
-          .cookie("auth-token", token, cookieOptions({}))
-          .cookie("isLoggedIn", true, cookieOptions({ httpOnly: false }))
-          .cookie(
-            "email",
-            userDetails.email,
-            cookieOptions({ httpOnly: false })
-          )
-          .cookie("name", userDetails.name, cookieOptions({ httpOnly: false }))
-          .sendStatus(200);
+      else res.cookie("auth-token", token, cookieOptions()).json({ user });
     });
 });
 
@@ -55,39 +46,22 @@ router.post("/login", (req, res) => {
   if (req.cookies["auth-token"])
     res.status(405).json({ error: "Already Logged In" });
   else
-    login(req.body.user, ({ error, token, userDetails }) => {
+    login(req.body.user, ({ error, token, user }) => {
       if (error) res.status(401).json({ error });
-      else
-        res
-          .cookie("auth-token", token, cookieOptions({}))
-          .cookie("isLoggedIn", true, cookieOptions({ httpOnly: false }))
-          .cookie(
-            "email",
-            userDetails.email,
-            cookieOptions({ httpOnly: false })
-          )
-          .cookie("name", userDetails.name, cookieOptions({ httpOnly: false }))
-          .sendStatus(200);
+      else res.cookie("auth-token", token, cookieOptions()).json({ user });
     });
 });
 
 router.post("/logout", (req, res) => {
   if (!req.cookies["auth-token"])
     res.status(405).json({ error: "No Users Logged In!" });
-  else
-    res
-      .clearCookie("auth-token", cookieOptions({ maxAge: 0 }))
-      .cookie("isLoggedIn", false, cookieOptions({ httpOnly: false }))
-      .sendStatus(200);
+  else res.cookie("auth-token", cookieOptions(0)).sendStatus(200);
 });
 
 router.post("/forgot", (req, res) => {
   forgotPassword(req.body.email, ({ error, token }) => {
     if (error) res.status(401).json({ error });
-    else
-      res
-        .cookie("reset-token", token, cookieOptions({ maxAge: 3e5 }))
-        .sendStatus(200);
+    else res.cookie("reset-token", token, cookieOptions(3e5)).sendStatus(200);
   });
 });
 
@@ -100,10 +74,7 @@ router.post("/verifyotp", (req, res) => {
       req.body.otp,
       ({ error, resetid }) => {
         if (error) res.status(401).json({ error });
-        else
-          res
-            .clearCookie("reset-token", cookieOptions({ maxAge: 0 }))
-            .json({ resetid });
+        else res.cookie("reset-token", cookieOptions(0)).json({ resetid });
       }
     );
 });
