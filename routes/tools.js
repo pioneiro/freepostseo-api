@@ -1,6 +1,24 @@
 import { Router } from "express";
+import jwt from "jsonwebtoken";
 
 const router = Router();
+
+router.use((req, res, next) => {
+  try {
+    if (!req.cookies["auth-token"]) throw Error("User Login Required");
+
+    const { userid } = jwt.verify(
+      req.cookies["auth-token"],
+      process.env.secret
+    );
+
+    req.userid = userid;
+
+    next();
+  } catch ({ message }) {
+    res.status(401).json({ error: message });
+  }
+});
 
 // URL Shortener
 
