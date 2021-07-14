@@ -75,7 +75,7 @@ import youtubemp3 from "../lib/utils/youtubemp3.js";
 
 router.post("/youtubemp3", (req, res) => {
   youtubemp3(req.body.url, ({ error, fileName, readStream }) => {
-    if (error) return res.json({ error });
+    if (error) return res.status(409).json({ error });
 
     res.setHeader("Access-Control-Expose-Headers", "filename");
     res.setHeader("Content-Type", "audio/mpeg");
