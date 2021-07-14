@@ -1,9 +1,11 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
+import userdb from "../lib/models/users.js";
+
 const router = Router();
 
-router.use((req, res, next) => {
+router.use(async (req, res, next) => {
   try {
     if (!req.cookies["auth-token"]) throw Error("User Login Required");
 
@@ -13,6 +15,24 @@ router.use((req, res, next) => {
     );
 
     req.userid = userid;
+
+    const tool = req.url.substring(req.url.lastIndexOf("/") + 1);
+
+    const user = await userdb.findById(req.userid);
+
+    if (!user.tools) user.tools = {};
+    if (!user.tools[tool]) user.tools[tool] = [];
+
+    const existing = user.tools[tool].filter((e) => e.url === req.body.url);
+
+    if (!existing.length)
+      user.tools[tool].push({
+        url: req.body.url,
+        lastUsed: new Date(),
+      });
+    else existing.forEach((e) => (e.lastUsed = new Date()));
+
+    await userdb.findByIdAndUpdate(req.userid, user);
 
     next();
   } catch ({ message }) {
